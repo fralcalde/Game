@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/WeaponItem/WI_ProjectileK.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/BigBullet/BigBullet.png" type="Texture" id=2]
+
+[node name="WI_BigProjectile" type="Node"]
+script = ExtResource( 1 )
+item_name = "Big Bullet"
+description = "A chunky projectile"
+_speed = 500
+_life_time = 4.0
+_texture = ExtResource( 2 )

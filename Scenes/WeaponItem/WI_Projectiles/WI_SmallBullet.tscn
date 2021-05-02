@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/WeaponItem/WI_ProjectileR.gd" type="Script" id=1]
+
+[node name="WI_SmallBullet" type="Node"]
+script = ExtResource( 1 )
+item_name = "Small Bullet"
+description = "A fast moving small bullet"
+_force = 500
+_life_time = 4.0
+_spread = 0.5
