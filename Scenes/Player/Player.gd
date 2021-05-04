@@ -67,3 +67,7 @@ func _physics_process(delta):
 		velocity += get_movement_input() * dash_modifier
 		velocity = velocity.linear_interpolate(get_movement_input() * max_speed, 0.25)
 		velocity = move_and_slide(velocity)
+
+
+func damage():
+	print(self, " - Player hit!!")

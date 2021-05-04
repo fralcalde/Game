@@ -16,7 +16,6 @@ func init(force, life_time, texture):
 	_texture = texture
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	_sprite_node.texture = _texture
 	_life_time_node.start(_life_time)
@@ -28,6 +27,17 @@ func _on_LifeTime_timeout():
 	queue_free()
 
 
-func _on_Area2D_body_exited(body):
+func _on_DamageArea_body_exited(body):
 	if body is Player:
 		remove_collision_exception_with(body)
+
+
+func _on_DamageArea_body_entered(body):
+	pass
+	
+
+
+func _on_ProjectileR_body_entered(body):
+	if not body in get_collision_exceptions() and body.has_method("damage"):
+		body.damage()
+		queue_free()

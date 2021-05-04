@@ -22,6 +22,7 @@ func spawn_projectile():
 	new_projectile.position = get_parent().projectile_spawn.get_global_transform().origin
 	new_projectile.add_collision_exception_with(get_parent().get_parent())
 	
+	
 	get_node("/root").add_child(new_projectile)
 
 

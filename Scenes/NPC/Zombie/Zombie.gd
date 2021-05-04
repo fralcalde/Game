@@ -28,7 +28,14 @@ func _on_DetectionArea_body_entered(body):
 		state_machine.travel("CHASE")
 
 
-
 func _on_DetectionArea_body_exited(body):
 	if body == enemy:
 		state_machine.travel("IDLE")
+
+
+func damage() -> void:
+	var current_state = state_machine.get_current_node()
+	
+	if current_state != "ATTACK":
+		state_machine.travel("STAGGER")
+
