@@ -3,6 +3,7 @@ class_name Player
 
 onready var state_machine = $StateMachine.get("parameters/playback")
 onready var weapon = $Weapon
+onready var sprite = $AnimatedSprite
 
 var velocity = Vector2.ZERO
 export var max_speed = 100
@@ -45,6 +46,13 @@ func get_movement_input() -> Vector2:
 	return input
 
 
+func handle_mouse_input() -> void:
+	if get_global_mouse_position().x < global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+
+
 func dash() -> void:
 	if velocity.length() == 0:
 		velocity = Vector2.RIGHT * dash_multiplier
@@ -57,6 +65,8 @@ func attack() -> void:
 
 
 func _physics_process(delta):
+	handle_mouse_input()
+	
 	var current_state = state_machine.get_current_node()
 	
 	if current_state == "IDLE" or current_state == "MOVE":
@@ -69,5 +79,5 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 
 
-func damage():
+func damage(_projectile):
 	print(self, " - Player hit!!")
