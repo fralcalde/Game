@@ -1,9 +1,10 @@
 extends RigidBody2D
 class_name ProjectileR
 
-var _force : Vector2
-var _life_time : float = 1.0 # Seconds
-var _texture : Texture
+export var _force : Vector2
+export var _life_time : float = 1.0 # Seconds
+export var _texture : Texture
+var _damage : int = 10
 #var max_bounce_angle : float = 10.0 # Degrees
 
 onready var _sprite_node = $Sprite
@@ -39,5 +40,5 @@ func _on_DamageArea_body_entered(body):
 
 func _on_ProjectileR_body_entered(body):
 	if not body in get_collision_exceptions() and body.has_method("damage"):
-		body.damage()
+		body.damage(self)
 		queue_free()

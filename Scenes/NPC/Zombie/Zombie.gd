@@ -17,25 +17,45 @@ func _ready():
 func _physics_process(delta):
 	var current_state = state_machine.get_current_node()
 	
-	if current_state == "CHASE":
-		velocity = position.direction_to(enemy.position) * speed
-		velocity = move_and_slide(velocity)
+	if current_state != "DIE":
+		if enemy and current_state == "IDLE":
+			state_machine.travel("CHASE")
+		
+		if current_state == "CHASE":
+			if enemy:
+				velocity = position.direction_to(enemy.position) * speed
+				velocity = move_and_slide(velocity)
+			else:
+				state_machine.travel("IDLE")
 
 
 func _on_DetectionArea_body_entered(body):
 	if body is Player:
-		enemy = body
-		state_machine.travel("CHASE")
+		call_deferred("set_enemy", body)
 
 
 func _on_DetectionArea_body_exited(body):
 	if body == enemy:
-		state_machine.travel("IDLE")
+		call_deferred("set_enemy", null)
 
 
-func damage() -> void:
-	var current_state = state_machine.get_current_node()
+func set_enemy(body : Node2D) -> void:
+	enemy = body
+
+
+func damage(_projectile) -> void:
+	health -= _projectile._damage
+	$ProgressBar.value = health
 	
-	if current_state != "ATTACK":
-		state_machine.travel("STAGGER")
+	if health <= 0:
+		die()
+	else:
+		var current_state = state_machine.get_current_node()
+		
+		if current_state != "ATTACK":
+			state_machine.travel("STAGGER")
+
+
+func die() -> void:
+	state_machine.travel("DIE")
 

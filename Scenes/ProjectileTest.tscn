@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Projectile/ProjectileR.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/SmallBullet/SmallBullet.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="World" type="Node2D"]
+
+[node name="ProjectileR" parent="." instance=ExtResource( 1 )]
+material = SubResource( 2 )
+position = Vector2( 24, 64 )
+gravity_scale = 1.0
+_force = Vector2( 500, 0 )
+_life_time = 4.0
+_texture = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="ProjectileR"]
+lifetime = 2.0
+explosiveness = 0.2
+randomness = 0.3
+local_coords = false
