@@ -159,15 +159,15 @@ animations = [ {
 "name": "IDLE",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "MOVE",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 19 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 24 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "DASH",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "MOVE",
+"speed": 5.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
@@ -192,7 +192,7 @@ shape = SubResource( 18 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 19 )
 animation = "IDLE"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]

@@ -8,6 +8,7 @@ var health : int
 var velocity = Vector2.ZERO
 var enemy = null
 onready var state_machine = $StateMachine.get("parameters/playback")
+onready var sprite = $Sprite
 
 
 func _ready():
@@ -25,6 +26,9 @@ func _physics_process(delta):
 			if enemy:
 				velocity = position.direction_to(enemy.position) * speed
 				velocity = move_and_slide(velocity)
+				
+				# Flip the sprite if we are moving left.
+				sprite.flip_h = velocity.x < 0
 			else:
 				state_machine.travel("IDLE")
 

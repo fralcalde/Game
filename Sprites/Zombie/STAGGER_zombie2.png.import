@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IDLE_zombie2.png-9d2f345b6c7a432deb307b994f63dc8c.stex"
+path="res://.import/STAGGER_zombie2.png-27b92b4539714e43f4925af329e9b006.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Zombie/IDLE_zombie2.png"
-dest_files=[ "res://.import/IDLE_zombie2.png-9d2f345b6c7a432deb307b994f63dc8c.stex" ]
+source_file="res://Sprites/Zombie/STAGGER_zombie2.png"
+dest_files=[ "res://.import/STAGGER_zombie2.png-27b92b4539714e43f4925af329e9b006.stex" ]
 
 [params]
 

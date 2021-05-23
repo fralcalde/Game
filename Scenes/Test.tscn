@@ -17,9 +17,6 @@ position = Vector2( 104, 128 )
 [node name="StateMachine" parent="Player" index="0"]
 parameters/playback = SubResource( 1 )
 
-[node name="AnimatedSprite" parent="Player" index="3"]
-frame = 1
-
 [node name="Zombie" parent="." instance=ExtResource( 3 )]
 position = Vector2( 856, 160 )
 
