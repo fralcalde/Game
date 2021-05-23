@@ -2,8 +2,9 @@ extends KinematicBody2D
 class_name Player
 
 onready var state_machine = $StateMachine.get("parameters/playback")
-onready var weapon = $Weapon
+onready var weapon : Weapon = $Weapon
 onready var sprite = $AnimatedSprite
+onready var inventory : Inventory = $Inventory
 
 var velocity = Vector2.ZERO
 export var max_speed = 100
@@ -13,6 +14,7 @@ export var dash_modifier = 50
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$StateMachine.active = true
+	inventory.save_weapon(weapon)
 
 
 func get_movement_input() -> Vector2:
@@ -37,7 +39,6 @@ func get_movement_input() -> Vector2:
 	
 	if Input.is_action_just_pressed("dash"):
 		state_machine.travel("DASH")
-#		dash()
 	
 	if current_state == "MOVE" or current_state == "IDLE":
 		if Input.is_action_pressed("attack"):
@@ -46,8 +47,15 @@ func get_movement_input() -> Vector2:
 	return input
 
 
-func handle_mouse_input() -> void:
+func sprite_look_at_mouse() -> void:
 	if get_global_mouse_position().x < global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+
+
+func sprite_look_at_movement_direction() -> void:
+	if velocity.x < 0:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
@@ -55,7 +63,7 @@ func handle_mouse_input() -> void:
 
 func dash() -> void:
 	if velocity.length() == 0:
-		velocity = Vector2.RIGHT * dash_multiplier
+		velocity = Vector2.RIGHT * max_speed * dash_multiplier
 	else:
 		velocity = velocity * dash_multiplier
 
@@ -65,19 +73,42 @@ func attack() -> void:
 
 
 func _physics_process(delta):
-	handle_mouse_input()
-	
 	var current_state = state_machine.get_current_node()
 	
 	if current_state == "IDLE" or current_state == "MOVE":
+		sprite_look_at_mouse()
 		velocity = get_movement_input() * max_speed
 		velocity = move_and_slide(velocity)
+		
+#		if Input.is_action_just_pressed("interact"):
+#			$InteractionComponent.interact()
 	
 	if current_state == "DASH":
-		velocity += get_movement_input() * dash_modifier
-		velocity = velocity.linear_interpolate(get_movement_input() * max_speed, 0.25)
+		sprite_look_at_movement_direction()
+		var input = get_movement_input()
+		velocity = velocity + input * max_speed / 10
+		velocity = velocity.normalized() * max_speed * dash_multiplier
 		velocity = move_and_slide(velocity)
 
 
 func damage(_projectile):
-	print(self, " - Player hit!!")
+	print(self, " - Player hit by ", _projectile)
+
+
+func hide_weapon():
+	weapon.visible = false
+
+
+func show_weapon():
+	weapon.visible = true
+
+
+func can_interact():
+	var current_state = state_machine.get_current_node()
+	return current_state == "IDLE" or current_state == "MOVE"
+
+
+func set_weapon(wep : PackedScene) -> void:
+	weapon.queue_free()
+	weapon = wep.instance()
+	add_child(weapon)

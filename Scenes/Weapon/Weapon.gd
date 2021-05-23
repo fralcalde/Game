@@ -1,6 +1,9 @@
 extends Node2D
 class_name Weapon
 
+export var weapon_name : String
+export var texture : Texture 
+
 export var init_fire_rate = 1.0
 export var init_reload_time = 1.0
 export var capacity = 10
@@ -17,9 +20,11 @@ var current_slot = 0
 onready var fire_rate_timer = $FireRateTimer
 onready var reload_timer = $ReloadTimer
 onready var projectile_spawn = $ProjectileSpawn
+onready var sprite = $Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_weapon_texture(texture)
 	items = get_weapon_items()
 	reset_stats()
 
@@ -38,13 +43,13 @@ func attack():
 
 func trigger_item() -> void:
 	if current_slot < items.size():
-		print(self, " - Triggering item number ", current_slot)
+#		print(self, " - Triggering item number ", current_slot)
 		items[current_slot].trigger()
 
 
 func reload() -> void:
 	reload_timer.start(reload_time)
-	print(self, " - Reloading!")
+#	print(self, " - Reloading!")
 
 
 func reset_stats() -> void:
@@ -74,16 +79,21 @@ func add_weapon_item(weapon_item : BaseWeaponItem) -> void:
 
 
 func _physics_process(delta):
+	var mouse_position = get_global_mouse_position()
+	
+	sprite.flip_v = mouse_position.x < get_global_transform().origin.x
+	
 	look_at(get_global_mouse_position())
 
 
 func _on_FireRateTimer_timeout():
-	print(self, " - ready to fire!")
+	pass
+#	print(self, " - ready to fire!")
 
 
 func _on_ReloadTimer_timeout():
 	current_slot = 0
-	print(self, " - reloaded!")
+#	print(self, " - reloaded!")
 
 
 func increment_slot_pointer(amount : int) -> void:
@@ -93,3 +103,7 @@ func increment_slot_pointer(amount : int) -> void:
 		reload()
 	else:
 		fire_rate_timer.start(fire_rate)
+
+
+func set_weapon_texture(tex : Texture) -> void:
+	sprite.texture = tex

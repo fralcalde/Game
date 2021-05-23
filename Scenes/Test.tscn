@@ -1,22 +1,43 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Item/DroppedWeapon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/NPC/Zombie/Zombie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Weapon/Shotgun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/UI_InteractionLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/UI/UI_Weapons.tscn" type="PackedScene" id=6]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="World" type="Node2D"]
-
-[node name="Floor" parent="." instance=ExtResource( 2 )]
-position = Vector2( 96, 256 )
-
-[node name="Floor2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, 256 )
-
-[node name="Floor3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 256 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 104, 128 )
 
+[node name="StateMachine" parent="Player" index="0"]
+parameters/playback = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="Player" index="3"]
+frame = 1
+
 [node name="Zombie" parent="." instance=ExtResource( 3 )]
-position = Vector2( 480, 160 )
+position = Vector2( 856, 160 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI_Weapons" parent="UILayer/UI" instance=ExtResource( 6 )]
+
+[node name="UI_InteractionLabel" parent="UILayer/UI" instance=ExtResource( 5 )]
+
+[node name="DroppedWeapon" parent="." instance=ExtResource( 2 )]
+position = Vector2( 290.892, 211.588 )
+item_scene = ExtResource( 4 )
+
+[editable path="Player"]
