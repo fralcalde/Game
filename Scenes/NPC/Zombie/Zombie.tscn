@@ -16,6 +16,16 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "MOVE",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "IDLE",
+"speed": 2.0
+}, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "STAGGER",
@@ -25,16 +35,6 @@ animations = [ {
 "loop": false,
 "name": "DIE",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "IDLE",
-"speed": 2.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "MOVE",
-"speed": 3.0
 } ]
 
 [sub_resource type="Animation" id=2]
@@ -249,8 +249,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "DIE"
-frame = 3
+animation = "IDLE"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -272,7 +271,7 @@ margin_left = -20.1815
 margin_top = -51.2946
 margin_right = 19.8185
 margin_bottom = -37.2946
-text = "DED"
+text = "IDLE"
 __meta__ = {
 "_edit_use_anchors_": false
 }

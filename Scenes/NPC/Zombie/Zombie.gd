@@ -2,11 +2,13 @@ extends KinematicBody2D
 
 export var max_health : int = 100
 export var speed : int = 50
+export var navigation_node_path : NodePath = ".."
 
 
 var health : int
 var velocity = Vector2.ZERO
 var enemy = null
+onready var nav : Navigation2D = get_node(navigation_node_path) 
 onready var state_machine = $StateMachine.get("parameters/playback")
 onready var sprite = $Sprite
 
@@ -24,13 +26,27 @@ func _physics_process(delta):
 		
 		if current_state == "CHASE":
 			if enemy:
-				velocity = position.direction_to(enemy.position) * speed
-				velocity = move_and_slide(velocity)
+				chase_enemy()
 				
 				# Flip the sprite if we are moving left.
 				sprite.flip_h = velocity.x < 0
 			else:
 				state_machine.travel("IDLE")
+
+
+func chase_enemy() -> void:
+	if nav:
+		var my_pos = get_global_transform().origin
+		var enemy_pos = enemy.get_global_transform().origin
+		var path = nav.get_simple_path(my_pos, enemy_pos, true)
+		
+		velocity = position.direction_to(path[1]) * speed
+		velocity = move_and_slide(velocity)
+	
+		get_node("../../Line2D").points = path
+	else:
+		velocity = position.direction_to(enemy.position) * speed
+		velocity = move_and_slide(velocity)
 
 
 func _on_DetectionArea_body_entered(body):
