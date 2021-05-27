@@ -79,3 +79,8 @@ func damage(_projectile) -> void:
 func die() -> void:
 	state_machine.travel("DIE")
 
+
+func _on_HitboxComponent_body_entered(body):
+	if body is Projectile or body is ProjectileR:
+		damage(body)
+		body.collided(self)

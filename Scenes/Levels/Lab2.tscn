@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/Levels/Laboratory/LabTable.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "lab_tile.png 0"
@@ -49,9 +49,9 @@ points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 1/z_index = 0
 
 [sub_resource type="NavigationPolygon" id=3]
-vertices = PoolVector2Array( 0, 32, 296, 32, 296, 272, 0, 464, 376, 32, 712, 32, 712, 120, 560, 120, 376, 272, 560, 176, 712, 176, 712, 464, 376, 464, 376, 304, 296, 304, 296, 464 )
+vertices = PoolVector2Array( 0, 32, 312, 32, 312, 264, 0, 480, 360, 32, 736, 32, 736, 128, 568, 128, 360, 264, 568, 176, 736, 176, 736, 480, 360, 480, 360, 312, 312, 312, 312, 480 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 4, 7, 9 ), PoolIntArray( 9, 10, 11, 12, 13 ), PoolIntArray( 8, 9, 13 ), PoolIntArray( 2, 8, 13, 14 ), PoolIntArray( 3, 2, 14 ), PoolIntArray( 3, 14, 15 ) ]
-outlines = [ PoolVector2Array( 0, 32, 0, 464, 296, 464, 296, 304, 376, 304, 376, 464, 712, 464, 712, 176, 560, 176, 560, 120, 712, 120, 712, 32, 376, 32, 376, 272, 296, 272, 296, 32 ) ]
+outlines = [ PoolVector2Array( 0, 32, 0, 480, 312, 480, 312, 312, 360, 312, 360, 480, 736, 480, 736, 176, 568, 176, 568, 128, 736, 128, 736, 32, 360, 32, 360, 264, 312, 264, 312, 32 ) ]
 
 [node name="Level" type="Navigation2D"]
 

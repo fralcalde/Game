@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/Item/DroppedWeapon.gd"
 }, {
 "base": "Area2D",
+"class": "Hitbox",
+"language": "GDScript",
+"path": "res://Scenes/Hitbox/HitboxComponent.gd"
+}, {
+"base": "Area2D",
 "class": "InteractionComponent",
 "language": "GDScript",
 "path": "res://Scenes/InteractionComponent/InteractionComponent.gd"
@@ -87,6 +92,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BaseWeaponItem": "",
 "Dropped_Weapon": "",
+"Hitbox": "",
 "InteractionComponent": "",
 "Inventory": "",
 "ItemSlot": "",

@@ -28,17 +28,10 @@ func _on_LifeTime_timeout():
 	queue_free()
 
 
-func _on_DamageArea_body_exited(body):
-	if body is Player:
-		remove_collision_exception_with(body)
-
-
-func _on_DamageArea_body_entered(body):
-	pass
-	
-
-
 func _on_ProjectileR_body_entered(body):
 	if not body in get_collision_exceptions() and body.has_method("damage"):
 		body.damage(self)
 		queue_free()
+
+func collided(node : Node) -> void:
+	print(self, " - Collided with ", node)
