@@ -63,8 +63,9 @@ func set_enemy(body : Node2D) -> void:
 	enemy = body
 
 
-func damage(_projectile) -> void:
-	health -= _projectile._damage
+func damage(damage_data : Dictionary) -> void:
+#	health -= _projectile._damage
+	health -= 10
 	$ProgressBar.value = health
 	
 	if health <= 0:
@@ -80,7 +81,15 @@ func die() -> void:
 	state_machine.travel("DIE")
 
 
-func _on_HitboxComponent_body_entered(body):
-	if body is Projectile or body is ProjectileR:
-		damage(body)
-		body.collided(self)
+func AttackRange_hit_enemies() -> void:
+	for hit_area in $Sprite/MeleeRange.get_overlapping_areas():
+		hit_area.hit(Dictionary())
+
+
+func _on_MeleeRange_area_entered(area):
+	state_machine.travel("ATTACK")
+
+
+func _on_HitboxComponent_on_hit(damage_data : Dictionary) -> void:
+	damage(damage_data)
+

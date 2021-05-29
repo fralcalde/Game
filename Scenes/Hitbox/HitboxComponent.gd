@@ -2,9 +2,10 @@ tool
 extends Area2D
 class_name Hitbox
 
+signal on_hit
+
 export var shape : Shape2D = null setget set_shape
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
@@ -15,3 +16,12 @@ func set_shape(_shape) -> void:
 	
 	shape = _shape
 	$CollisionShape2D.shape = shape
+
+
+func hit(damage_data : Dictionary) -> void:
+	call_deferred("emit_signal", "on_hit", damage_data)
+
+
+func _on_HitboxComponent_body_entered(body):
+	if body.has_method("get_damage_data"):
+		hit(body.get_damage_data())

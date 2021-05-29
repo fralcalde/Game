@@ -35,3 +35,7 @@ func _physics_process(delta):
 
 func collided(node : Node) -> void:
 	print(self, " - Collided with ", node)
+
+
+func get_damage_data() -> Dictionary:
+	return Dictionary()

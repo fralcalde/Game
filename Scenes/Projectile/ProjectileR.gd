@@ -35,3 +35,7 @@ func _on_ProjectileR_body_entered(body):
 
 func collided(node : Node) -> void:
 	print(self, " - Collided with ", node)
+
+
+func get_damage_data() -> Dictionary:
+	return Dictionary()

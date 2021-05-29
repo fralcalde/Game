@@ -91,7 +91,7 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 
 
-func damage(_projectile):
+func damage(_projectile) -> void:
 	print(self, " - Player hit by ", _projectile)
 
 
@@ -112,3 +112,11 @@ func set_weapon(wep : PackedScene) -> void:
 	weapon.queue_free()
 	weapon = wep.instance()
 	add_child(weapon)
+
+
+func _on_HitboxComponent_body_entered(body):
+	damage(body)
+
+
+func _on_HitboxComponent_on_hit(damage_data : Dictionary) -> void:
+	print(damage_data)
