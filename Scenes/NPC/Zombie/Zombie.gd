@@ -8,9 +8,13 @@ export var navigation_node_path : NodePath = ".."
 var health : int
 var velocity = Vector2.ZERO
 var enemy = null
-onready var nav : Navigation2D = get_node(navigation_node_path) 
+var melee_damage : int = 10
+onready var nav : Navigation2D = get_node(navigation_node_path) as Navigation2D
 onready var state_machine = $StateMachine.get("parameters/playback")
 onready var sprite = $Sprite
+onready var melee_range_area = $Sprite/MeleeRange
+onready var hitbox_area = $HitboxComponent
+onready var healthbar = $HealthBar
 
 
 func _ready():
@@ -42,8 +46,11 @@ func chase_enemy() -> void:
 		
 		velocity = position.direction_to(path[1]) * speed
 		velocity = move_and_slide(velocity)
-	
-		get_node("../../Line2D").points = path
+		
+		# For debugging purposes
+		var line_node = get_node("../../Line2D") as Line2D
+		if line_node:
+			line_node.points = path
 	else:
 		velocity = position.direction_to(enemy.position) * speed
 		velocity = move_and_slide(velocity)
@@ -64,9 +71,9 @@ func set_enemy(body : Node2D) -> void:
 
 
 func damage(damage_data : Dictionary) -> void:
-#	health -= _projectile._damage
-	health -= 10
-	$ProgressBar.value = health
+	print(self, " - Hit with damage_data: ", damage_data)
+	health -= damage_data["damage"]
+	healthbar.value = health
 	
 	if health <= 0:
 		die()
@@ -79,11 +86,18 @@ func damage(damage_data : Dictionary) -> void:
 
 func die() -> void:
 	state_machine.travel("DIE")
+	melee_range_area.queue_free()
+	hitbox_area.queue_free()
+	healthbar.queue_free()
 
 
 func AttackRange_hit_enemies() -> void:
-	for hit_area in $Sprite/MeleeRange.get_overlapping_areas():
-		hit_area.hit(Dictionary())
+	for hit_area in melee_range_area.get_overlapping_areas():
+		var damage_data = {
+			"owner": self,
+			"damage": melee_damage
+		}
+		hit_area.hit(damage_data)
 
 
 func _on_MeleeRange_area_entered(area):

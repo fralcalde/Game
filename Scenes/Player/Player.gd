@@ -9,7 +9,7 @@ onready var inventory : Inventory = $Inventory
 var velocity = Vector2.ZERO
 export var max_speed = 100
 export var dash_multiplier = 2
-export var dash_modifier = 50
+#export var dash_modifier = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -79,9 +79,6 @@ func _physics_process(delta):
 		sprite_look_at_mouse()
 		velocity = get_movement_input() * max_speed
 		velocity = move_and_slide(velocity)
-		
-#		if Input.is_action_just_pressed("interact"):
-#			$InteractionComponent.interact()
 	
 	if current_state == "DASH":
 		sprite_look_at_movement_direction()
@@ -119,4 +116,4 @@ func _on_HitboxComponent_body_entered(body):
 
 
 func _on_HitboxComponent_on_hit(damage_data : Dictionary) -> void:
-	print(damage_data)
+	print(self, " - Hit with damage_data: ", damage_data)

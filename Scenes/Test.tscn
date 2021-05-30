@@ -22,3 +22,4 @@ __meta__ = {
 [node name="UI_InteractionLabel" parent="UILayer/UI" instance=ExtResource( 5 )]
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false

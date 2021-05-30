@@ -45,9 +45,9 @@ _global_script_classes=[ {
 "path": "res://Scenes/Player/Player.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Projectile",
+"class": "ProjectileK",
 "language": "GDScript",
-"path": "res://Scenes/Projectile/Projectile.gd"
+"path": "res://Scenes/Projectile/ProjectileK.gd"
 }, {
 "base": "RigidBody2D",
 "class": "ProjectileR",
@@ -97,7 +97,7 @@ _global_script_class_icons={
 "Inventory": "",
 "ItemSlot": "",
 "Player": "",
-"Projectile": "",
+"ProjectileK": "",
 "ProjectileR": "",
 "UI_InteractionLabel": "",
 "UI_WeaponsSelect": "",

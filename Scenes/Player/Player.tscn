@@ -192,7 +192,6 @@ anims/MOVE = SubResource( 17 )
 position = Vector2( 0, -12 )
 frames = SubResource( 18 )
 animation = "IDLE"
-frame = 3
 playing = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]

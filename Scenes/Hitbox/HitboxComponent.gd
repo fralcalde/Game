@@ -25,3 +25,5 @@ func hit(damage_data : Dictionary) -> void:
 func _on_HitboxComponent_body_entered(body):
 	if body.has_method("get_damage_data"):
 		hit(body.get_damage_data())
+	if body.has_method("on_collision"):
+		body.on_collision(get_parent())
