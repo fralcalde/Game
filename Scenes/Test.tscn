@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Levels/Lab2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/UI/UI_HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/UI_InteractionLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/UI/UI_Weapons.tscn" type="PackedScene" id=6]
 
@@ -20,6 +21,8 @@ __meta__ = {
 [node name="UI_Weapons" parent="UILayer/UI" instance=ExtResource( 6 )]
 
 [node name="UI_InteractionLabel" parent="UILayer/UI" instance=ExtResource( 5 )]
+
+[node name="UI_HealthBar" parent="UILayer/UI" instance=ExtResource( 2 )]
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false

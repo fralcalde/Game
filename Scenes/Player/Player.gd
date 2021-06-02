@@ -7,14 +7,18 @@ onready var sprite = $AnimatedSprite
 onready var inventory : Inventory = $Inventory
 
 var velocity = Vector2.ZERO
+export var max_health : int = 100
 export var max_speed = 100
 export var dash_multiplier = 2
 #export var dash_modifier = 50
+
+onready var current_health : int = max_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$StateMachine.active = true
 	inventory.save_weapon(weapon)
+	GameEvents.player_initialized(self)
 
 
 func get_movement_input() -> Vector2:
@@ -88,10 +92,6 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 
 
-func damage(_projectile) -> void:
-	print(self, " - Player hit by ", _projectile)
-
-
 func hide_weapon():
 	weapon.visible = false
 
@@ -111,9 +111,7 @@ func set_weapon(wep : PackedScene) -> void:
 	add_child(weapon)
 
 
-func _on_HitboxComponent_body_entered(body):
-	damage(body)
-
-
 func _on_HitboxComponent_on_hit(damage_data : Dictionary) -> void:
 	print(self, " - Hit with damage_data: ", damage_data)
+	current_health -= damage_data["damage"]
+	GameEvents.player_hit(current_health)

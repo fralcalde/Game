@@ -78,5 +78,33 @@ position = Vector2( 680, 152 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 56, 88 )
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+
 [node name="Zombie" parent="." instance=ExtResource( 5 )]
 position = Vector2( 688, 88 )
+
+[node name="Zombie2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 648, 88 )
+
+[node name="Zombie3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 600, 88 )
+
+[node name="Zombie4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 696, 216 )
+
+[node name="Zombie5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 648, 216 )
+
+[node name="Zombie6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 600, 216 )
+
+[node name="Zombie7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 696, 296 )
+
+[node name="Zombie8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 648, 296 )
+
+[node name="Zombie9" parent="." instance=ExtResource( 5 )]
+position = Vector2( 600, 296 )
