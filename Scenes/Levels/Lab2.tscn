@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/Lab/lab_tile.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Lab/lab_wall.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/NPC/Zombie/Zombie.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Weapon/Shotgun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Levels/Laboratory/LabTable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Levels/level.gd" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -54,6 +55,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArra
 outlines = [ PoolVector2Array( 0, 32, 0, 480, 312, 480, 312, 312, 360, 312, 360, 480, 736, 480, 736, 176, 568, 176, 568, 128, 736, 128, 736, 32, 360, 32, 360, 264, 312, 264, 312, 32 ) ]
 
 [node name="Level" type="Navigation2D"]
+script = ExtResource( 8 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -65,46 +67,25 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
 navpoly = SubResource( 3 )
 
-[node name="DroppedWeapon" parent="." instance=ExtResource( 4 )]
+[node name="YSortObjects" type="YSort" parent="."]
+
+[node name="DroppedWeapon" parent="YSortObjects" instance=ExtResource( 4 )]
 position = Vector2( 72, 384 )
 item_scene = ExtResource( 6 )
 
-[node name="LabTable2" parent="." instance=ExtResource( 7 )]
+[node name="LabTable2" parent="YSortObjects" instance=ExtResource( 7 )]
 position = Vector2( 608, 152 )
 
-[node name="LabTable" parent="." instance=ExtResource( 7 )]
+[node name="LabTable" parent="YSortObjects" instance=ExtResource( 7 )]
 position = Vector2( 680, 152 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="YSortObjects" instance=ExtResource( 3 )]
 position = Vector2( 56, 88 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="YSortObjects/Player"]
 current = true
 smoothing_enabled = true
 
-[node name="Zombie" parent="." instance=ExtResource( 5 )]
+[node name="Zombie" parent="YSortObjects" instance=ExtResource( 5 )]
 position = Vector2( 688, 88 )
-
-[node name="Zombie2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 648, 88 )
-
-[node name="Zombie3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 600, 88 )
-
-[node name="Zombie4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 696, 216 )
-
-[node name="Zombie5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 648, 216 )
-
-[node name="Zombie6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 600, 216 )
-
-[node name="Zombie7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 696, 296 )
-
-[node name="Zombie8" parent="." instance=ExtResource( 5 )]
-position = Vector2( 648, 296 )
-
-[node name="Zombie9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 600, 296 )
+navigation_node_path = NodePath("../..")

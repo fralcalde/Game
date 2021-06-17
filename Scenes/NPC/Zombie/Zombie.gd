@@ -60,9 +60,6 @@ func chase_enemy() -> void:
 			velocity = move_and_slide(velocity)
 
 
-
-
-
 func set_enemy(body : Node2D) -> void:
 	enemy = body
 	
@@ -92,6 +89,7 @@ func die() -> void:
 	melee_range_area.disconnect("hitbox_entered", self, "_on_MeleeRange_hitbox_entered")
 	detection_area.disconnect("body_entered", self, "_on_DetectionArea_body_entered")
 	hitbox_area.disconnect("on_hit", self, "_on_HitboxComponent_on_hit")
+	sprite.z_index = sprite.z_index - 1
 
 
 func melee_hit_enemies() -> void:

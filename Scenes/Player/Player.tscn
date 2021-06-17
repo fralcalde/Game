@@ -153,20 +153,20 @@ tracks/0/keys = {
 
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 24 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 13 ) ],
 "loop": true,
-"name": "IDLE",
-"speed": 5.0
+"name": "DASH",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "MOVE",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 24 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "DASH",
-"speed": 20.0
+"name": "IDLE",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=19]
@@ -192,7 +192,7 @@ anims/MOVE = SubResource( 17 )
 position = Vector2( 0, -12 )
 frames = SubResource( 18 )
 animation = "IDLE"
-frame = 3
+frame = 1
 playing = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]

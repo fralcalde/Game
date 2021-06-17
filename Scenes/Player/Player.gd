@@ -8,7 +8,7 @@ onready var inventory : Inventory = $Inventory
 
 var velocity = Vector2.ZERO
 export var max_health : int = 100
-export var max_speed = 100
+export var max_speed = 200
 export var dash_multiplier = 2
 #export var dash_modifier = 50
 
@@ -112,6 +112,8 @@ func set_weapon(wep : PackedScene) -> void:
 
 
 func _on_HitboxComponent_on_hit(damage_data : Dictionary) -> void:
-	print(self, " - Hit with damage_data: ", damage_data)
-	current_health -= damage_data["damage"]
-	GameEvents.player_hit(current_health)
+	var current_state = state_machine.get_current_node()
+	if current_state != "DASH":
+		print(self, " - Hit with damage_data: ", damage_data)
+		current_health -= damage_data["damage"]
+		GameEvents.player_hit(current_health)
